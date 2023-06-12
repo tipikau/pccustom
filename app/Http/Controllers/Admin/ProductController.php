@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
@@ -38,7 +39,7 @@ class ProductController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         $path = $request->file('image')->store('products');
         $params = $request->all();
@@ -77,7 +78,7 @@ class ProductController extends Controller
      * @param \App\Models\Product $product
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
         $params = $request->all();
         if ($request->hasFile('image')) {
