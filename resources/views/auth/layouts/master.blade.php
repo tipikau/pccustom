@@ -8,16 +8,16 @@
     <title>Админка: @yield('title')</title>
 
     <!-- Scripts -->
-    <script src="/js/app.js" defer></script>
+    <script src="/public/js/app.js" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/admin.css" rel="stylesheet">
+    <link href="/public/css/app.css" rel="stylesheet">
+    <link href="/public/css" rel="stylesheet">
+    <link href="/public/css/admin.css" rel="stylesheet">
 </head>
 <body>
 <div id="app">
@@ -29,11 +29,12 @@
 
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a
-                            href="{{ route('categories.index') }}">Категории</a></li>
-                    <li><a href=" {{ route('products.index') }} ">Товары</a>
+                    @admin
+                    <li><a href="{{ route('categories.index') }}">Категории</a></li>
+                    <li><a href="{{ route('products.index') }}">Товары</a>
                     </li>
-                    <li><a href="http://laravel-diplom-1.rdavydov.ru/admin/orders">Заказы</a></li>
+                    <li><a href="{{ route('home') }}">Заказы</a></li>
+                    @endadmin
                 </ul>
 
                 @guest
@@ -53,7 +54,8 @@
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false" v-pre>
-                                Администратор
+                                @admin Администратор @else {{ Auth::user()->name }} @endadmin
+
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Http\Middleware\CheckIsAdmin;
 
 class User extends Authenticatable
 {
@@ -42,8 +43,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function isAdmin()
+
+    public function isAdmin():bool
     {
         return $this->is_admin === 1;
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
